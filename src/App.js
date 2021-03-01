@@ -1,23 +1,22 @@
 import logo from './logo.svg';
+import {useEffect, useState} from 'react'
 import './App.css';
 
 function App() {
+  const [data, setData] = useState([])
+
+  useEffect(()=> {
+    const fetchData = async()=> {
+      let result = await fetch('https://swapi.dev/api/starships/')
+      result = await result.json()
+      console.log(result)
+      result = result.results
+      setData(result)
+    }
+    fetchData()
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
